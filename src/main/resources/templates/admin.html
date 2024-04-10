@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{template.html :: head-navbar}"></div>
+<div th:replace="~{template.html :: navbar}"></div><hr>
+<body>
+<h3 align="center">Панель администратора</h3>
+<table border="1" class="container mt-4">
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Активность</th>
+        <th>Роли</th>
+        <th>Бан</th>
+        <th>Редактирование</th>
+        <th>Подробная информация</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.id}">ID placeholder</td>
+        <td th:text="${user.email}">Email placeholder</td>
+        <td th:text="${user.active ? 'true' : 'false'}">Active placeholder</td>
+        <td>
+            <ul>
+                <li th:each="role : ${user.roles}" th:text="${role}">Role placeholder</li>
+            </ul>
+        </td>
+        <td >
+            <form th:action="'/admin/user/ban/' + ${user.id}" method="post">
+                <input type="submit" value="Бан"  >
+            </form>
+        </td>
+        <td>
+            <a th:href="'/admin/user/edit/' + ${user.id}">Редактировние</a>
+        </td>
+        <td>
+            <a th:href="'/user/' + ${user.id}">Подробная информация</a>
+        </td>
+    </tr>
+    <th:block th:if="${#lists.isEmpty(users)}">
+        <tr>
+            <td colspan="7">Пользователей нет</td>
+        </tr>
+    </th:block>
+</table>
+
+<hr>
+<h4 align="center"> Изменение категорий </h4>
+<table border="1" class="container pt-3">
+    <tr>
+        <th>ID</th>
+        <th>Категория</th>
+        <th>Удалить</th>
+        <th>Изменить</th>
+
+    </tr>
+    <tr th:each="category : ${categories}">
+        <td th:text="${category.id}">ID placeholder</td>
+        <td th:text="${category.name}">Name placeholder</td>
+        <td >
+            <form th:action="'/admin/category/delete/' + ${category.id}" method="post">
+                <input type="submit" value="Удалить"  >
+            </form>
+        </td>
+        <td>
+            <a th:href="'/admin/category/edit/' + ${category.id}">Редактировние</a>
+        </td>
+
+    </tr>
+
+    <th:block th:if="${#lists.isEmpty(categories)}">
+        <tr>
+            <td colspan="7">Пока категорий нет (0_0) </td>
+        </tr>
+    </th:block>
+</table>
+<br>
+<h5 align="center"> Добавление категории </h5>
+<form class="container mt-4" action="/admin/category/add/" method="post" enctype="multipart/form-data">
+    <textarea required class="form-control" id="name" th:name="name"></textarea>
+    <input align="center" type="submit" value="Добавить"  >
+</form>
+
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

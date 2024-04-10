@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{template.html :: head-navbar}"></div>
+<div th:replace="~{template.html :: navbar}"></div><hr>
+<body>
+<h3 th:text="'Редактирование пользователя ' + ${user.name}">Редактирование пользователя</h3>
+<form action="/admin/user/edit" method="post">
+  <!-- Loop through roles using Thymeleaf -->
+  <div th:each="role : ${roles}">
+    <label>
+      <!-- Here we are setting the checkbox to be checked if the user has the role -->
+      <input type="checkbox" th:name="${role}"
+             th:checked="${#lists.contains(user.roles, role)}" th:value="${role}" />
+      <span th:text="${role}">Role</span>
+    </label>
+  </div>
+  <!-- Hidden fields to pass the user ID and CSRF token -->
+  <input type="hidden" th:value="${user.id}" name="userId">
+  <button type="submit">Сохранить</button>
+</form>
+
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

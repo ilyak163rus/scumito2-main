@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="~{template.html :: head-navbar}"></div>
+<div th:replace="~{template.html :: navbar}"></div><hr>
+<body>
+<h3 style="text-align: center">Информация о пользователе</h3>
+<hr>
+<div style="text-align: center">
+  <img th:src="@{/image/avatar.png}"
+       style="border:2px solid black; border-radius: 20px" height="120">
+  <br><br>
+  <h4 th:text="${user.name}">Имя пользователя</h4>
+  <h4>Тут должен быть номер</h4>
+  <h4 th:text="${user.email}">Почта</h4>
+  <br>
+</div>
+<br>
+<hr>
+<h3 style="text-align: center" th:text="'Товары пользователя ' + ${user.name}">Товары пользователя</h3>
+<br>
+<div class="card-columns">
+  <div th:each="product : ${products}">
+    <a th:href="@{/product/{id}(id=${product.id})}" class="product-link">
+      <div class="card text-white bg-dark my-3 product">
+        <div class="card-body">
+          <h5 class="card-title" th:text="${product.title}">Название товара</h5>
+          <p class="card-text" th:text="${product.price} + ' ₽'">Цена товара</p>
+        </div>
+        <div class="card-footer" th:text="${product.user.name}">Имя пользователя</div>
+      </div>
+    </a>
+  </div>
+  <h1 style="text-align: center" th:if="${products.isEmpty()}">Не найдено</h1>
+</div>
+
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
