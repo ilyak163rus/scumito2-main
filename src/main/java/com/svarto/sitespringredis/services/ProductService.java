@@ -41,7 +41,7 @@ public class ProductService {
         System.out.println("======");
 
         // System.out.println(responseRepository.findByProductId(1L));
-        System.out.println(responseRepository.findAllByAb(1L));
+        System.out.println(responseRepository.findAllByCustomerId(1L));
 
         return (List<Product>) productRepository.findAll();
     }

@@ -21,7 +21,7 @@ public class Response implements Serializable {
     @Indexed
     private Long id;
     @Indexed
-    private Long ab;
+    private Long CustomerId;
     @Indexed
     private Long ProductId;
     @Indexed

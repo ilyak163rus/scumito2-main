@@ -55,7 +55,7 @@ public class ResponseService {
         // log.info("Saving new Response with Customer Id: " + user.getId() + " message:
         // " + message + " on product:"+ product);
 
-        response.setAb(user.getId());
+        response.setCustomerId(user.getId());
         response.setProductId(product.getId());
         System.out.println(product.getId());
         response.setMessage_date(ZonedDateTime.now());
