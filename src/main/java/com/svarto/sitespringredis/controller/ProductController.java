@@ -1,5 +1,6 @@
 package com.svarto.sitespringredis.controller;
 
+import com.svarto.sitespringredis.Category;
 import com.svarto.sitespringredis.Product;
 import com.svarto.sitespringredis.User;
 import com.svarto.sitespringredis.services.CategoryService;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.Base64;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -43,13 +45,23 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String productInfo(@PathVariable Long id, Model model, Principal principal) {
         Product product = productService.getProductById(id);
+        Optional<Category> optionalCategory = (Optional<Category>) categoryService.getCategoryById(Long.valueOf(product.getCategory_id()));
+        if(optionalCategory.isPresent()){
+            Category category = optionalCategory.get();
+            model.addAttribute("category", category);
+        }
+        else{
+            // Обработка случая, когда категория была не указана
+            Category category = new Category((long) -1, "не найдено" );
+            model.addAttribute("category", category);
+        }
+
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("product", product);
         model.addAttribute("authorProduct", product.getUser());
         return "index_info";
     }
 
-    @PostMapping("/product/{id}")
     public String makeResponse(@PathVariable("id") Long id, Principal principal) {
         Product product = productService.getProductById(id);
         String message = "bad idea";

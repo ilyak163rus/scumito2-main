@@ -3,8 +3,6 @@
 <div th:replace="~{template.html :: head-navbar}"></div>
 <div th:replace="~{template.html :: navbar}"></div><hr>
 <body>
-<h1>Svarto books</h1>
-<hr>
 <div align="center">
     <h1>Регистрация пользователя</h1>
     <form th:action="@{/registration}" method="post" th:object="${user}">
