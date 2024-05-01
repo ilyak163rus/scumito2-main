@@ -14,7 +14,7 @@
         <div class="col-md-2">
             <div class="d-flex flex-column">
                 <p>Описание:</p>
-                <span th:text="'Цена: ' +  ${product.price}"></span>
+                <span th:text="'Цена: ' +  ${product.price} + ' рублей'"></span>
                 <span th:text="'Категория: ' +  ${category.name}"></span>
                 <span th:text="'Город: ' +  ${product.city}"></span>
                 <span th:text="'Номер телефона: ' +  ${user.phone}"></span>
@@ -22,7 +22,10 @@
         </div>
         <div class="col-md-8">
             <div class="text-center">
-                <img th:src="'data:image/jpeg;base64,' + ${product.image}" alt="Product Image">
+                <img th:if="${product.image != null}"
+                     th:src="'data:image/jpeg;base64,' + ${product.image}"
+                     alt="Product Image" class="img-fluid">
+                <span th:if="${product.image == null}">Нет изображения</span>
             </div>
             <p class="container mt-4 text-center" th:text="${product.description}"></p>
             <form th:action="'/product/' + ${product.id}" method="post" enctype="multipart/form-data">

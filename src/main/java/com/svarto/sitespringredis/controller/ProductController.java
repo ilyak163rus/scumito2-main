@@ -45,10 +45,14 @@ public class ProductController {
     @GetMapping("/product/{id}")
     public String productInfo(@PathVariable Long id, Model model, Principal principal) {
         Product product = productService.getProductById(id);
+        Optional <User> optionalUser = (Optional<User>) userService.getUserByUser_id(product.getUser_id());
         Optional<Category> optionalCategory = (Optional<Category>) categoryService.getCategoryById(Long.valueOf(product.getCategory_id()));
+
         if(optionalCategory.isPresent()){
             Category category = optionalCategory.get();
+            User user = optionalUser.get();
             model.addAttribute("category", category);
+            model.addAttribute("user", user);
         }
         else{
             // Обработка случая, когда категория была не указана
@@ -56,7 +60,6 @@ public class ProductController {
             model.addAttribute("category", category);
         }
 
-        model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("product", product);
         model.addAttribute("authorProduct", product.getUser());
         return "index_info";

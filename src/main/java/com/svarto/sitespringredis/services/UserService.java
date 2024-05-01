@@ -13,10 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,6 +87,10 @@ public class UserService {
         if (principal == null)
             return new User();
         return userRepository.findByEmail(principal.getName());
+    }
+
+    public Optional<User> getUserByUser_id(Long id){
+        return userRepository.findById(id);
     }
 
 }
