@@ -17,14 +17,18 @@
     </p>
     <p class="container mt-4" style="text-align: center" th:text="${product.description}"></p>
 
-    <div>
+    <div class="container mt-4">
         <form th:action="'/product/' + ${product.id}" method="post" enctype="multipart/form-data">
-            <label align="center"><b>Уточните инорфмацию для продавца ниже!<b /></label>
-            <textarea required class="form-control" id="message" th:id="message"
+            <p class="text-center"><b>Уточните инорфмацию для продавца ниже!</b></p>
+            <textarea required class="form-control mb-3" id="message" th:id="message"
                 placeholder="Напишите Ваше предложение сюда..."></textarea>
-            <input type="submit" value="Откликнуться">
+            <div class="d-flex justify-content-center ">
+                <div >
+                    <button type="submit" class="btn btn-dark mb-3" > Откликнуться </button>
+                </div>
+            </div>
         </form>
-        <div />
+        </div>
 
         <hr>
         <p style="text-align: center">
