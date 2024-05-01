@@ -32,7 +32,6 @@ public class UserService {
     @Autowired
     private final PasswordEncoder passwordEncoder;
 
-    private long id = 0;
     public boolean createUser(User user) {
         String email = user.getEmail();
         Long newId = idGenerator.incrementAndGet();

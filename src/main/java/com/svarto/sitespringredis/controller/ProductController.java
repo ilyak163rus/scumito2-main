@@ -1,7 +1,6 @@
 package com.svarto.sitespringredis.controller;
 
 import com.svarto.sitespringredis.Product;
-import com.svarto.sitespringredis.Response;
 import com.svarto.sitespringredis.User;
 import com.svarto.sitespringredis.services.ProductService;
 import com.svarto.sitespringredis.services.ResponseService;
@@ -22,7 +21,7 @@ public class ProductController {
     @Autowired
     private final UserService userService;
     @Autowired
-    private  ResponseService responseService;
+    private ResponseService responseService;
 
     @GetMapping("/")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal,
@@ -71,8 +70,5 @@ public class ProductController {
         model.addAttribute("products", userService.getProductByUser_id(user));
         return "my_products";
     }
-
-
-
 
 }

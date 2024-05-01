@@ -1,12 +1,9 @@
 package com.svarto.sitespringredis.services;
 
 import com.svarto.sitespringredis.Product;
-import com.svarto.sitespringredis.Role;
 import com.svarto.sitespringredis.User;
 import com.svarto.sitespringredis.repos.ProductRepository;
-import com.svarto.sitespringredis.repos.ResponseRepository;
 import com.svarto.sitespringredis.repos.UserRepository;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,22 +24,11 @@ public class ProductService {
     @Autowired
     private final ProductRepository productRepository;
 
-    @Autowired
-    private final ResponseRepository responseRepository;
-
     public List<Product> list(String title) {
         if (title != null) {
             return productRepository.findByTitle(title);
 
         }
-
-        System.out.println("======");
-        System.out.println(responseRepository.findAll());
-        System.out.println("======");
-
-        // System.out.println(responseRepository.findByProductId(1L));
-        System.out.println(responseRepository.findAllByCustomerId(1L));
-
         return (List<Product>) productRepository.findAll();
     }
 

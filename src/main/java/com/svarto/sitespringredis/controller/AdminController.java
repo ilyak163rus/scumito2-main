@@ -3,7 +3,6 @@ package com.svarto.sitespringredis.controller;
 import com.svarto.sitespringredis.Category;
 import com.svarto.sitespringredis.Role;
 import com.svarto.sitespringredis.User;
-import com.svarto.sitespringredis.repos.CategoryRepository;
 import com.svarto.sitespringredis.services.CategoryService;
 import com.svarto.sitespringredis.services.UserService;
 import lombok.RequiredArgsConstructor;
@@ -33,37 +32,40 @@ public class AdminController {
     private final CategoryService categoryService;
 
     @GetMapping("/admin")
-    public String admin(Model model, Principal principal){
+    public String admin(Model model, Principal principal) {
         List<Category> categories = categoryService.list();
         model.addAttribute("users", userService.list());
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("categories", categories);
-        /*model.addAttribute("category", categoryService.getCategoryByPrincipal(principal));*/
+        /*
+         * model.addAttribute("category",
+         * categoryService.getCategoryByPrincipal(principal));
+         */
         return "admin";
     }
 
     @PostMapping("/admin/user/ban/{id}")
-    public String userBan(@PathVariable("id") Long id){
+    public String userBan(@PathVariable("id") Long id) {
         userService.banUser(id);
         return "redirect:/admin";
     }
 
     @GetMapping("/admin/user/edit/{user}")
-    public String userEdit(@PathVariable("user") User user, Model model, Principal principal){
+    public String userEdit(@PathVariable("user") User user, Model model, Principal principal) {
         model.addAttribute("user", user);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         model.addAttribute("roles", Role.values());
         return "user_edit";
     }
+
     @PostMapping("/admin/user/edit")
     public String category(@RequestParam("userId") User user, @RequestParam Map<String, String> form) {
         userService.changeUserRoles(user, form);
         return "redirect:/admin";
     }
 
-
     @PostMapping("/admin/category/add/")
-    public String categoryEdit(String name){
+    public String categoryEdit(String name) {
         Category category1 = new Category();
         Long id = idGenerator.incrementAndGet();
         category1.setId(id);
@@ -75,22 +77,24 @@ public class AdminController {
     }
 
     @PostMapping("/admin/category/delete/{id}")
-    public String categoryDelete(@PathVariable("id") Long id ){
+    public String categoryDelete(@PathVariable("id") Long id) {
         categoryService.deleteCategoryById(id);
         return "redirect:/admin";
     }
 
     @GetMapping("/admin/category/edit/{id}")
-    public String categoryEdit(@PathVariable("id")Long id, User user,  Principal principal, Model model){
+    public String categoryEdit(@PathVariable("id") Long id, User user, Principal principal, Model model) {
         model.addAttribute("category", categoryService.getCategoryById(id));
         model.addAttribute("user", user);
         model.addAttribute("user", userService.getUserByPrincipal(principal));
         return "category_edit";
     }
 
-   /* @PostMapping("/admin/category/edit/{category}")
-    public String categoryDelete(@PathVariable("category") Category category){
-        categoryService.editCategory(category);
-        return "redirect:/admin";
-    }*/
+    /*
+     * @PostMapping("/admin/category/edit/{category}")
+     * public String categoryDelete(@PathVariable("category") Category category){
+     * categoryService.editCategory(category);
+     * return "redirect:/admin";
+     * }
+     */
 }
