@@ -52,7 +52,7 @@ public class ProductController {
             Category category = optionalCategory.get();
             User user = optionalUser.get();
             model.addAttribute("category", category);
-            model.addAttribute("user", user);
+            model.addAttribute("main_user", user);
         }
         else{
             // Обработка случая, когда категория была не указана
@@ -60,6 +60,7 @@ public class ProductController {
             model.addAttribute("category", category);
         }
 
+        model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("product", product);
         model.addAttribute("authorProduct", product.getUser());
         return "index_info";
@@ -107,6 +108,11 @@ public String createProduct(@RequestParam("title") String title,
         return "redirect:/my/products";
     }
 
+    @PostMapping("/user/{user_id}/{id}")
+    public String deleteProductByAdmin(@PathVariable Long id, @PathVariable Long user_id) {
+        productService.deleteProduct(id);
+        return "redirect:/user/{user_id}";
+    }
     @GetMapping("/my/products")
     public String userProducts(Principal principal, Model model) {
         User user = productService.getUserByPrincipal(principal);
