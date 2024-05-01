@@ -34,32 +34,6 @@ public class ProductService {
         return (List<Product>) productRepository.findAll();
     }
 
-    public void saveProductWithImage(Principal principal, Product product, MultipartFile image) {
-    String email = principal.getName();
-    User user = userRepository.findByEmail(email);
-    if (user == null) {
-        System.out.println("No user found for email: " + email);
-        return;
-    }
-
-    product.setUser(user);
-    product.setUser_id(user.getId());
-    Long newId = idGenerator.incrementAndGet();
-    product.setId(newId);
-    product.setBoost(false);
-
-    try {
-        String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
-        product.setImage(imageBase64); // Предполагается, что у класса Product есть поле для изображения
-    } catch (IOException e) {
-        System.out.println("Error processing image");
-        e.printStackTrace();
-    }
-
-    log.info("Saving new {}", product);
-    productRepository.save(product);
-    }
-
     public void saveProduct(Principal principal, Product product) {
         User user1 = new User(1L, "Test", true, "test@test.com", "123", "01.01.2000", "8937", new ArrayList<>(),
                 new HashSet<>());
