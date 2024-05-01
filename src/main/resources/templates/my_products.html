@@ -19,6 +19,12 @@
                    id="productName" th:name="title">
         </div>
         <div class="form-group">
+            <label for="category">Категория</label>
+            <select class="form-control" id="category" th:name="Category_id">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <div class="form-group">
             <label for="price">Цена товара</label>
             <div class="input-group mb-3">
                 <input type="number" required class="form-control" id="price" th:name="price">
@@ -27,6 +33,7 @@
                 </div>
             </div>
         </div>
+
         <div class="form-group">
             <label for="searchCity">Город</label>
             <select id="searchCity" required th:name="city" class="form-control">
