@@ -3,20 +3,43 @@
 <div th:replace="~{template.html :: head-navbar}"></div>
 <div th:replace="~{template.html :: navbar}"></div><hr>
 <body>
-<div align="center">
-    <h1>Регистрация пользователя</h1>
-    <form th:action="@{/registration}" method="post" th:object="${user}">
-        <label>Полное имя:</label>
-        <input type="text" name="name" th:field="*{name}" />
-        <label>День рождения (yyyy-mm-dd):</label>
-        <input type="text" name="birthday" th:field="*{birthday}" />
-        <label>E-mail:</label>
-        <input type="email" name="email" th:field="*{email}" />
-        <label>Пароль:</label>
-        <input type="password" name="password" th:field="*{password}" />
-
-        <input type="submit" value="Регистрация"/>
-    </form>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="text-center">Регистрация</h1>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/registration}" method="post" th:object="${user}">
+                        <div class="form-group">
+                            <label for="name">Полное имя:</label>
+                            <input type="text" class="form-control" id="name" name="name" th:field="*{name}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="birthday">День рождения (yyyy-mm-dd):</label>
+                            <input type="text" class="form-control" id="birthday" name="birthday" th:field="*{birthday}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Номер телефона:</label>
+                            <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" class="form-control" id="email" name="email" th:field="*{email}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Пароль:</label>
+                            <input type="password" class="form-control" id="password" name="password" th:field="*{password}" />
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-dark">Регистрация</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
