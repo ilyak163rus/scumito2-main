@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Base64;
 
 @Controller
 @RequiredArgsConstructor
@@ -50,12 +53,32 @@ public class ProductController {
         responseService.makeResponse(message, principal, product);
         return "index_info";
     }
-
     @PostMapping("/product/create")
-    public String createProduct(@ModelAttribute("product") Product product, Principal principal) {
-        productService.saveProduct(principal, product);
-        return "redirect:/";
+public String createProduct(@RequestParam("title") String title,
+                            @RequestParam("price") int price,
+                            @RequestParam("city") String city,
+                            @RequestParam("description") String description,
+                            @RequestParam("image") MultipartFile image,
+                            Principal principal) {
+    Product product = new Product();
+    product.setTitle(title);
+    product.setPrice(price);
+    product.setCity(city);
+    product.setDescription(description);
+
+    if (!image.isEmpty()) {
+        try {
+            String imageBase64 = Base64.getEncoder().encodeToString(image.getBytes());
+            product.setImage(imageBase64);
+        } catch (IOException e) {
+            System.out.println("Error processing image");
+            e.printStackTrace();
+        }
     }
+
+    productService.saveProduct(principal, product);
+    return "redirect:/";
+}
 
     @PostMapping("/product/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {

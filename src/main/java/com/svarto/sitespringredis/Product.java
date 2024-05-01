@@ -23,7 +23,7 @@ public class Product implements Serializable {
     private String city;
     private User user;
     private String description;
-    private String image_url;
+    private String image;
     private boolean active;
     @Indexed
     private int Category_id;
