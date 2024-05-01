@@ -6,6 +6,7 @@
 
 <body>
 
+<div class="container-lg">
 <h1 style="text-align: center">Поиск товаров по Самарской области</h1><hr>
 <form method="get" action="/">
     <div class="form-row">
@@ -39,6 +40,7 @@
         </a>
     </div>
     <h1 style="text-align: center" th:if="${#lists.isEmpty(products)}">Не найдено</h1>
+</div>
 </div>
 
 </body>
