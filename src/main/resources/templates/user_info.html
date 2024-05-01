@@ -5,14 +5,25 @@
 <body>
 <h3 style="text-align: center">Информация о пользователе</h3>
 <hr>
-<div style="text-align: center">
-  <img th:src="@{/image/avatar.png}"
-       style="border:2px solid black; border-radius: 20px" height="120">
-  <br><br>
-  <h4 th:text="${user.name}">Имя пользователя</h4>
-  <h4>Тут должен быть номер</h4>
-  <h4 th:text="${user.email}">Почта</h4>
-  <br>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <img th:src="@{/image/avatar.png}"
+                 class="img-fluid rounded" style="max-height: 150px;">
+            <h4 class="mt-3" th:text="${user.id}">ID пользователя</h4>
+            <h4 th:text="'Имя пользователя: ' + ${user.name}">Нет имени пользователя</h4>
+            <h4 th:text="'Номер телефона: ' + ${user.phone}">Номер не указан</h4>
+            <h4 th:text="'Почта: ' + ${user.email}">Нет почты</h4>
+            <h4 th:text="'День рождения: ' + ${user.birthday}">Нет дня рождения</h4>
+            <h4 th:text="'Реклама: ' + ${user.active}"> Нет информации</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 <br>
 <hr>
