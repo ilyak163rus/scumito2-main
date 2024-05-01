@@ -11,11 +11,6 @@ import com.svarto.sitespringredis.Response;
 public interface ResponseRepository extends CrudRepository<Response, Long> {
 
     Response findByProductId(Long id);
-    // List<Response> findAllByProductId(Long id);
 
     List<Response> findAllByCustomerId(Long id);
-
-    // List<Response> findByMessage(String message);
-
-    // List<Response> findAllResponses
 }

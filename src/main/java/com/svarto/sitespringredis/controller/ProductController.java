@@ -63,12 +63,14 @@ public String createProduct(@RequestParam("title") String title,
                             @RequestParam("city") String city,
                             @RequestParam("description") String description,
                             @RequestParam("image") MultipartFile image,
+                            @RequestParam("Category_id") int  category_id,
                             Principal principal) {
     Product product = new Product();
     product.setTitle(title);
     product.setPrice(price);
     product.setCity(city);
     product.setDescription(description);
+    product.setCategory_id(category_id);
 
     if (!image.isEmpty()) {
         try {
