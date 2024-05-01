@@ -2,6 +2,7 @@ package com.svarto.sitespringredis.controller;
 
 import com.svarto.sitespringredis.Product;
 import com.svarto.sitespringredis.User;
+import com.svarto.sitespringredis.services.CategoryService;
 import com.svarto.sitespringredis.services.ProductService;
 import com.svarto.sitespringredis.services.ResponseService;
 import com.svarto.sitespringredis.services.UserService;
@@ -20,6 +21,9 @@ public class ProductController {
     private final ProductService productService;
     @Autowired
     private final UserService userService;
+
+    @Autowired
+    private final CategoryService categoryService;
     @Autowired
     private ResponseService responseService;
 
@@ -67,6 +71,7 @@ public class ProductController {
     public String userProducts(Principal principal, Model model) {
         User user = productService.getUserByPrincipal(principal);
         model.addAttribute("user", user);
+        model.addAttribute("categories", categoryService.list());
         model.addAttribute("products", userService.getProductByUser_id(user));
         return "my_products";
     }
