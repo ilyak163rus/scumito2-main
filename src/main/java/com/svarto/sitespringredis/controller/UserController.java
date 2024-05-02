@@ -51,4 +51,11 @@ public class UserController {
         model.addAttribute("user", user);
         return "profile";
     }
+
+    @GetMapping("/responses")
+    public String responses(Principal principal, Model model) {
+        User user = userService.getUserByPrincipal(principal);
+        model.addAttribute("user", user);
+        return "responses";
+    }
 }

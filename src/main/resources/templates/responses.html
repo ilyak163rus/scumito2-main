@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<div th:replace="template.html :: head-navbar"></div>
+<div th:replace="template.html :: navbar"></div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" th:href="@{/static/bootstrap.css}">
+</head>
+<body>
+  <div class="myapp-content">
+    <div class="myapp-main-container">
+      <h2 class="myapp-h2">Отклики</h2>
+      
+      <div class="myapp-container">
+        <img src="/image/1.png" alt="Avatar" style="width:90px">
+        <p><span class="myapp-clickable">Вася Курочкин</span> <span class="myapp-link-like">Мешок картошки</span></p>
+        <p>Здравствуйте. Почему решили продать?</p>
+      </div>
+  
+      <div class="myapp-container">
+        <img src="/image/2.png" alt="Avatar" style="width:90px">
+        <p><span class="myapp-clickable">Кура Васечкин</span> <span class="myapp-link-like">Картошки мешок</span></p>
+        <p>Приветсвую. Торг уместен</p>
+      </div>
+    </div>
+  </div>
+  
+</body>
+</html>

@@ -8973,3 +8973,67 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+.myapp-content {
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.myapp-main-container {
+  width: 66%;
+  border: 2px solid #ccc;
+  background-color: #dbd1d0;
+  border-radius: 5px;
+  padding: 16px;
+  margin-top: 16px;
+  box-sizing: border-box;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.myapp-h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-top: 0;
+}
+
+.myapp-container {
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.myapp-container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.myapp-container img {
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.myapp-container span {
+  font-size: 20px;
+  margin-right: 15px;
+}
+
+.myapp-clickable {
+  cursor: pointer;
+}
+
+.myapp-link-like {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 14px !important;
+}
+
