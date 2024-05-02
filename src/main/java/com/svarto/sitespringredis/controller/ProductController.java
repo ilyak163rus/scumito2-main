@@ -34,11 +34,12 @@ public class ProductController {
 
     @GetMapping("/")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal,
-            Model model) {
-        System.out.println(title);
+                           Long cat_id, Model model) {
         model.addAttribute("products", productService.list(title));
+        model.addAttribute("categories", categoryService.list());
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
+        model.addAttribute("Category_id", cat_id);
         return "index";
     }
 

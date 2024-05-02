@@ -19,7 +19,14 @@
                 <option value="Сызрань">Сызрань</option>
             </select>
         </div>
-        <div class="form-group col-md-10">
+        <div class="form-group col-md-2">
+            <label for="Category_id">Категория</label>
+            <select class="form-control" id="Category_id" th:name="Category_id">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-8">
             <label for="searchWord">Поиск по объявлениям</label>
             <input type="text" name="searchWord" th:value="${searchWord}" class="form-control" id="searchWord">
         </div>

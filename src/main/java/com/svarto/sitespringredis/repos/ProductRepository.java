@@ -8,6 +8,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {
     List<Product> findByTitle(String title);
+    List<Product> findByCategory_id(int id);
 
     List<Product> findByUser_id(Long id);
 }

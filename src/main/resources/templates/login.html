@@ -3,36 +3,30 @@
 <div th:replace="~{template.html :: head-navbar}"></div>
 <div th:replace="~{template.html :: navbar}"></div><hr>
 
-<body>
-<div th:if="${param.error}">
-    Invalid username and password.
-</div>
-<div th:if="${param.logout}">
-    You have been logged out.
-</div>
-<form th:action="@{/login}" method="post" >
-    <div class="form-group">
-        <label for="email">Электронная почта</label>
-        <input type="email" class="form-control"  id="email" name="username">
+<div class="container">
+    <div th:if="${param.error}" class="alert alert-danger">Invalid username or password.</div>
+    <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
+
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="email">Электронная почта</label>
+            <input type="email" class="form-control" id="email" name="username">
+        </div>
+        <div class="form-group">
+            <label for="password">Пароль</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <div class="d-flex justify-content-center">
+            <input type="submit" class="btn btn-dark" value="Войти"/>
+        </div>
+    </form>
+
+    <div class="d-flex justify-content-center">
+        <a href="/registration" class="text-center">Зарегистрироваться?</a>
     </div>
-    <div class="form-group">
-        <label for="password">Пароль</label>
-        <input type="password" class="form-control" id="password" name="password">
-    </div>
-
-    <input type="submit" value="Sign In"/></div>
-</form>
-<a align="center" href="/registration">Зарегистрироваться</a>
-
-<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}"
-        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"
-        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-        crossorigin="anonymous"></script>
-
+</div>
+<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}" integrity="sha384-q8i/x+965dzo0rt7abk41jstqiaqvgrvzpbzo5smxkp4yfrvh+8abtte1pi6jizo" crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}" integrity="sha384-zmp7rvo3miykv+2+9j3uj46jbk0wlauadn689acwoqbbjisnjak/l8wvcwpipm49" crossorigin="anonymous"></script>
+<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}" integrity="sha384-smhykdladwkxon1emn1qk/hfnucbvrzyymz4qppea6sjb/ptj0euyqp0mk8ck+5t" crossorigin="anonymous"></script>
 </body>
 </html>

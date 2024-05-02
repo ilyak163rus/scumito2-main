@@ -29,8 +29,8 @@ public class ProductService {
     public List<Product> list(String title) {
         if (title != null) {
             return productRepository.findByTitle(title);
-
         }
+
         return (List<Product>) productRepository.findAll();
     }
 
