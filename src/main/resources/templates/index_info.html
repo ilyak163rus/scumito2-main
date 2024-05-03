@@ -5,55 +5,64 @@
 <hr>
 
 <body>
-<hr>
+    <hr>
 
-<h1 class="container mt-4 text-center" th:text="${product.title}"></h1>
+    <h1 class="container mt-4 text-center" th:text="${product.title}"></h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-2">
-            <div class="d-flex flex-column">
-                <p>Описание:</p>
-                <span th:text="'Цена: ' +  ${product.price} + ' рублей'"></span>
-                <span th:text="'Категория: ' +  ${category.name}"></span>
-                <span th:text="'Город: ' +  ${product.city}"></span>
-                <span th:text="'Номер телефона: ' +  ${main_user.phone}"></span>
-            </div>
-        </div>
-        <div class="col-md-8">
-            <div class="text-center">
-                <img th:if="${product.image != null}"
-                     th:src="'data:image/jpeg;base64,' + ${product.image}"
-                     alt="Product Image" class="img-fluid">
-                <span th:if="${product.image == null}">Нет изображения</span>
-            </div>
-            <p class="container mt-4 text-center" th:text="${product.description}"></p>
-            <form th:action="'/product/' + ${product.id}" method="post" enctype="multipart/form-data">
-                <p class="text-center"><b>Уточните информацию для продавца ниже!</b></p>
-                <textarea required class="form-control mb-3" id="message" th:id="message"
-                          placeholder="Напишите Ваше предложение сюда..."></textarea>
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="btn btn-dark mb-3">Откликнуться</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="d-flex flex-column">
+                    <p>Описание:</p>
+                    <span th:text="'Цена: ' +  ${product.price} + ' рублей'"></span>
+                    <span th:text="'Категория: ' +  ${category.name}"></span>
+                    <span th:text="'Город: ' +  ${product.city}"></span>
+                    <span th:text="'Номер телефона: ' +  ${main_user.phone}"></span>
                 </div>
-            </form>
+            </div>
+            <div class="col-md-8">
+                <div class="text-center">
+                    <img th:if="${product.image != null}" th:src="'data:image/jpeg;base64,' + ${product.image}"
+                        alt="Product Image" class="img-fluid">
+                    <span th:if="${product.image == null}">Нет изображения</span>
+                </div>
+                <p class="container mt-4 text-center" th:text="${product.description}"></p>
+                <form id="myForm" th:action="@{'/product/' + ${product.id}}" method="post"
+                    enctype="multipart/form-data">
+                    <input type="hidden" name="productId" th:value="${product.id}" />
+                    <p class="text-center"><b>Уточните информацию для продавца ниже!</b></p>
+                    <textarea required class="form-control mb-3" id="message" name="message"
+                        placeholder="Напишите Ваше предложение сюда..."></textarea>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-dark mb-3">Откликнуться</button>
+                    </div>
+                </form>
+                <script>
+                    document.getElementById('myForm').addEventListener('submit', function (event) {
+                        alert('Сообщение отправлено!');
+                    });
+                </script>
+            </div>
         </div>
     </div>
-</div>
 
-<hr>
-<p class="text-center">
-    <a th:href="@{/user/{id}(id=${authorProduct.id})}">
-        <img th:src="@{/image/avatar.png}" alt="Avatar" width="32" height="32" class="rounded-circle" th:alt="${authorProduct.name}">
-        <span th:text="${authorProduct.name}"></span>
-    </a>
-</p>
-<script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}"
+    <hr>
+    <p class="text-center">
+        <a th:href="@{/user/{id}(id=${authorProduct.id})}">
+            <img th:src="@{/image/avatar.png}" alt="Avatar" width="32" height="32" class="rounded-circle"
+                th:alt="${authorProduct.name}">
+            <span th:text="${authorProduct.name}"></span>
+        </a>
+    </p>
+    <script th:src="@{https://code.jquery.com/jquery-3.3.1.slim.min.js}"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js}"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
-<script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"
+    <script th:src="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js}"
         integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
         crossorigin="anonymous"></script>
 </body>
+
 </html>
