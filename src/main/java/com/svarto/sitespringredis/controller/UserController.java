@@ -1,13 +1,18 @@
 package com.svarto.sitespringredis.controller;
 
+import com.svarto.sitespringredis.Product;
+import com.svarto.sitespringredis.Response;
 import com.svarto.sitespringredis.User;
 import com.svarto.sitespringredis.services.ProductService;
+import com.svarto.sitespringredis.services.ResponseService;
 import com.svarto.sitespringredis.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
@@ -52,10 +57,19 @@ public class UserController {
         return "profile";
     }
 
-    @GetMapping("/responses")
+    /*@GetMapping("/responses")
     public String responses(Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
+        List<Response> responses = new ArrayList<>();
+
+        for (Product product : user.getProducts()) {
+            List<Response> productResponses = ResponseService.findByProductId(product.getId());
+            responses.addAll(productResponses);
+        }
+
         model.addAttribute("user", user);
+        model.addAttribute("responses", responses);
         return "responses";
-    }
+    }*/
+
 }

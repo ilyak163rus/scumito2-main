@@ -2,6 +2,7 @@ package com.svarto.sitespringredis.services;
 
 import java.security.Principal;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,12 +46,16 @@ public class ResponseService {
         response.setId(newId);
 
         response.setCustomerId(user.getId());
-        response.setProductId(product.getId());
+        response.setPid(product.getId());
         response.setMessage_date(ZonedDateTime.now());
         response.setMessage(message);
+        log.info("Savin new response {}", response);
 
         responseRepository.save(response);
 
     }
+    /*public List<Response> findByProductId(long product_id){
+        return responseRepository.findByProductId(product_id);
+    }*/
 
 }

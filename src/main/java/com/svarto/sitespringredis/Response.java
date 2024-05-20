@@ -23,7 +23,7 @@ public class Response implements Serializable {
     @Indexed
     private Long CustomerId;
     @Indexed
-    private Long ProductId;
+    private Long Pid;
     @Indexed
     private String message;
     private ZonedDateTime message_date;

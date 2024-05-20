@@ -48,7 +48,7 @@ public class ProductService {
         Long newId = idGenerator.incrementAndGet();
         product.setId(newId);
         product.setBoost(false);
-        log.info("Savin new {}", product);
+        //log.info("Savin new {}", product);
         productRepository.save(product);
     }
 

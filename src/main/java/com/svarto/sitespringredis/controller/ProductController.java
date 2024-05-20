@@ -11,6 +11,7 @@ import com.svarto.sitespringredis.services.ResponseService;
 import com.svarto.sitespringredis.services.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +22,8 @@ import java.security.Principal;
 import java.time.ZonedDateTime;
 import java.util.Base64;
 import java.util.Optional;
-
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
@@ -37,6 +39,8 @@ public class ProductController {
 
     @Autowired
     private final ResponseRepository responseRepository;
+    @Autowired
+    private RedisAtomicLong idGenerator;
 
     @GetMapping("/")
     public String products(@RequestParam(name = "searchWord", required = false) String title, Principal principal,
@@ -46,6 +50,10 @@ public class ProductController {
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
         model.addAttribute("Category_id", cat_id);
+        System.out.println(productService.getProductById(16L).getTitle());
+        System.out.println(responseRepository.findByPid(16L));
+        System.out.println(responseRepository.findByCustomerId(1L));
+        System.out.println(responseRepository.findAll());
         return "index";
     }
 
@@ -77,23 +85,25 @@ public class ProductController {
     public String createResponse(@PathVariable Long id, @RequestParam("message") String message, Principal principal) {
         User user = productService.getUserByPrincipal(principal);
         Response response = new Response();
+        Long newId = idGenerator.incrementAndGet();
+        response.setId(newId);
         response.setMessage(message);
         response.setCustomerId(user.getId());
-        response.setProductId(id);
+        response.setPid(id);
         response.setMessage_date(ZonedDateTime.now());
         System.out.println("Making response with message" + message);
+        log.info("Savin new response {}", response);
         responseRepository.save(response);
-        System.out.println(responseRepository.findAll());
         return "redirect:/product/{id}";
     }
 
-    public String makeResponse(@PathVariable("id") Long id, Principal principal) {
+    /*public String makeResponse(@PathVariable("id") Long id, Principal principal) {
         Product product = productService.getProductById(id);
         String message = "bad idea";
         System.out.println(message);
         responseService.makeResponse(message, principal, product);
         return "index_info";
-    }
+    }*/
 
     @PostMapping("/product/create")
     public String createProduct(@RequestParam("title") String title,
