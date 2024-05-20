@@ -34,7 +34,7 @@ public class ResponseService {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private static ResponseRepository responseRepository;
+    private  ResponseRepository responseRepository;
 
     public void makeResponse(String message, Principal principal, Product product) {
         Response response = new Response();
@@ -62,8 +62,12 @@ public class ResponseService {
         List<Product> products = productRepository.findByUser_id(user.getId());
         List<Response> allResponses = new ArrayList<>();
         for (Product product : products) {
+            System.out.println("=================");
             System.out.println(product.getId());
+            System.out.println(responseRepository.findByPid(3L));
+            System.out.println("=================");
             allResponses.addAll(responseRepository.findByPid(product.getId()));
+            
         }
         return allResponses;
     }

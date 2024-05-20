@@ -12,16 +12,21 @@
   <div class="myapp-content">
       <div class="myapp-main-container">
           <h2 class="myapp-h2">Отклики</h2>
-          <div th:each="response : ${responses}">
-              <div class="myapp-container">
-                  <img th:src="@{/image/{id}(id=${response.customerId})}" alt="Avatar" style="width:90px">
-                  <p>
-                      <span class="myapp-clickable" th:text="${userService.getUserById(response.customerId).name}">Имя пользователя</span>
-                      <span class="myapp-link-like" th:text="${productService.getProductById(response.pid).name}">Товар</span>
-                  </p>
-                  <p th:text="${response.message}">Текст отклика</p>
-              </div>
-          </div>
+          <div th:each="response, iterStat : ${responses}">
+            <div class="myapp-container">
+                <img src="/image/1.png" style="width:90px" alt="Avatar">
+                <p>
+                  <a th:href="@{/user/{id}(id=${customers[iterStat.index].id})}">
+                    <span  class="myapp-clickable" th:text="${customers[iterStat.index].name}">Имя пользователя</span>
+                  </a>
+                <a th:href="@{/product/{id}(id=${products[iterStat.index].id})}" >
+                  <span class="myapp-link-like" th:text="${products[iterStat.index].title}">Товар</span></a>
+                    
+                </p>
+                <p th:text="${response.message}">Текст отклика</p>
+            </div>
+        </div>
+        
       </div>
   </div>
   </body>

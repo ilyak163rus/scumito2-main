@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 @Controller
 @RequiredArgsConstructor
 public class UserController {
@@ -62,9 +63,25 @@ public class UserController {
     public String responses(Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
         List<Response> responses = responseService.getResponsesByUser(user);
+        
+        // Создаём списки для пользователей и товаров, связанных с откликами
+        List<User> customers = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
+        
+        for (Response response : responses) {
+            Optional<User> customer = userService.getUserByUser_id(response.getCustomerId());
+            User user1 = customer.get();
+            Product product = productService.getProductById(response.getPid());
+            customers.add(user1);
+            products.add(product);
+        }
+        
+        // Добавление атрибутов в model
         model.addAttribute("user", user);
         model.addAttribute("responses", responses);
+        model.addAttribute("customers", customers);
+        model.addAttribute("products", products);
+        
         return "responses";
     }
-
 }
