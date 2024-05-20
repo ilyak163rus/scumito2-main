@@ -2,6 +2,7 @@ package com.svarto.sitespringredis.services;
 
 import java.security.Principal;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.svarto.sitespringredis.Product;
 import com.svarto.sitespringredis.Response;
 import com.svarto.sitespringredis.User;
+import com.svarto.sitespringredis.repos.ProductRepository;
 import com.svarto.sitespringredis.repos.ResponseRepository;
 import com.svarto.sitespringredis.repos.UserRepository;
 
@@ -30,7 +32,9 @@ public class ResponseService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private ResponseRepository responseRepository;
+    private ProductRepository productRepository;
+    @Autowired
+    private static ResponseRepository responseRepository;
 
     public void makeResponse(String message, Principal principal, Product product) {
         Response response = new Response();
@@ -54,8 +58,14 @@ public class ResponseService {
         responseRepository.save(response);
 
     }
-    /*public List<Response> findByProductId(long product_id){
-        return responseRepository.findByProductId(product_id);
-    }*/
-
+    public List<Response> getResponsesByUser(User user) {
+        List<Product> products = productRepository.findByUser_id(user.getId());
+        List<Response> allResponses = new ArrayList<>();
+        for (Product product : products) {
+            System.out.println(product.getId());
+            allResponses.addAll(responseRepository.findByPid(product.getId()));
+        }
+        return allResponses;
+    }
+    
 }

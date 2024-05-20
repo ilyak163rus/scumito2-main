@@ -50,10 +50,8 @@ public class ProductController {
         model.addAttribute("user", productService.getUserByPrincipal(principal));
         model.addAttribute("searchWord", title);
         model.addAttribute("Category_id", cat_id);
-        System.out.println(productService.getProductById(16L).getTitle());
-        System.out.println(responseRepository.findByPid(16L));
-        System.out.println(responseRepository.findByCustomerId(1L));
-        System.out.println(responseRepository.findAll());
+        System.out.println(responseRepository.findByPid(3L));
+        //System.out.println(responseService.findAllResponsesByUser(userService.getUserByUser_id(1L)));
         return "index";
     }
 

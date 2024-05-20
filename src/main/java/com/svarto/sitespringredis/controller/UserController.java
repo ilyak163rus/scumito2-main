@@ -18,6 +18,7 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
     private final ProductService productService;
+    private final ResponseService responseService;
 
     @GetMapping("/login")
     public String login(Principal principal, Model model) {
@@ -57,19 +58,13 @@ public class UserController {
         return "profile";
     }
 
-    /*@GetMapping("/responses")
+    @GetMapping("/responses")
     public String responses(Principal principal, Model model) {
         User user = userService.getUserByPrincipal(principal);
-        List<Response> responses = new ArrayList<>();
-
-        for (Product product : user.getProducts()) {
-            List<Response> productResponses = ResponseService.findByProductId(product.getId());
-            responses.addAll(productResponses);
-        }
-
+        List<Response> responses = responseService.getResponsesByUser(user);
         model.addAttribute("user", user);
         model.addAttribute("responses", responses);
         return "responses";
-    }*/
+    }
 
 }

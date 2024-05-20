@@ -10,22 +10,22 @@
 </head>
 <body>
   <div class="myapp-content">
-    <div class="myapp-main-container">
-      <h2 class="myapp-h2">Отклики</h2>
-      
-      <div class="myapp-container">
-        <img src="/image/1.png" alt="Avatar" style="width:90px">
-        <p><span class="myapp-clickable">Вася Курочкин</span> <span class="myapp-link-like">Мешок картошки</span></p>
-        <p>Здравствуйте. Почему решили продать?</p>
+      <div class="myapp-main-container">
+          <h2 class="myapp-h2">Отклики</h2>
+          <div th:each="response : ${responses}">
+              <div class="myapp-container">
+                  <img th:src="@{/image/{id}(id=${response.customerId})}" alt="Avatar" style="width:90px">
+                  <p>
+                      <span class="myapp-clickable" th:text="${userService.getUserById(response.customerId).name}">Имя пользователя</span>
+                      <span class="myapp-link-like" th:text="${productService.getProductById(response.pid).name}">Товар</span>
+                  </p>
+                  <p th:text="${response.message}">Текст отклика</p>
+              </div>
+          </div>
       </div>
-  
-      <div class="myapp-container">
-        <img src="/image/2.png" alt="Avatar" style="width:90px">
-        <p><span class="myapp-clickable">Кура Васечкин</span> <span class="myapp-link-like">Картошки мешок</span></p>
-        <p>Приветсвую. Торг уместен</p>
-      </div>
-    </div>
   </div>
+  </body>
   
-</body>
+  
+
 </html>
