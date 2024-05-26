@@ -42,13 +42,12 @@ public class ProductService {
             return;
         }
 
-
         product.setUser(user);
         product.setUser_id(user.getId());
         Long newId = idGenerator.incrementAndGet();
         product.setId(newId);
         product.setBoost(false);
-        //log.info("Savin new {}", product);
+        // log.info("Savin new {}", product);
         productRepository.save(product);
     }
 
@@ -60,10 +59,12 @@ public class ProductService {
     }
 
     public void deleteProduct(Long id) {
+        //
         productRepository.deleteById(id);
     }
 
     public Product getProductById(Long id) {
+        System.out.println(userRepository.findAll());
         return productRepository.findById(id).orElse(null);
     }
 
@@ -73,17 +74,21 @@ public class ProductService {
 
 }
 
-
-      /*User user1 = new User(1L, "Test", true, "test@test.com", "123", "01.01.2000", "8937", new ArrayList<>(),
-                new HashSet<>());
-        Product product1 = new Product(1L, 1L, "Майка летняя", "Автор", 1000, "Самара", user1, "Крутая майка", "ссылка",
-                true, 1, false);
-        Product product2 = new Product(2L, 1L, "Майка Зимняя", "Автор2", 5000, "Сызрань", user1,
-                "Не крутая дорогая зимняя майка", "ссылка2", true, 1, false);
-        Product product3 = new Product(3L, 1L, "Шорты весенние", "Автор3", 700, "Тольятти", user1, "Шорты веселые",
-                "ссылка3", true, 2, false);
-
-        productRepository.save(product1);
-        productRepository.save(product2);
-        productRepository.save(product3);
-*/
+/*
+ * User user1 = new User(1L, "Test", true, "test@test.com", "123", "01.01.2000",
+ * "8937", new ArrayList<>(),
+ * new HashSet<>());
+ * Product product1 = new Product(1L, 1L, "Майка летняя", "Автор", 1000,
+ * "Самара", user1, "Крутая майка", "ссылка",
+ * true, 1, false);
+ * Product product2 = new Product(2L, 1L, "Майка Зимняя", "Автор2", 5000,
+ * "Сызрань", user1,
+ * "Не крутая дорогая зимняя майка", "ссылка2", true, 1, false);
+ * Product product3 = new Product(3L, 1L, "Шорты весенние", "Автор3", 700,
+ * "Тольятти", user1, "Шорты веселые",
+ * "ссылка3", true, 2, false);
+ * 
+ * productRepository.save(product1);
+ * productRepository.save(product2);
+ * productRepository.save(product3);
+ */

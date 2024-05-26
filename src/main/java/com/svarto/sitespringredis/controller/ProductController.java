@@ -23,6 +23,7 @@ import java.time.ZonedDateTime;
 import java.util.Base64;
 import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
+
 @Slf4j
 @Controller
 @RequiredArgsConstructor
@@ -51,7 +52,8 @@ public class ProductController {
         model.addAttribute("searchWord", title);
         model.addAttribute("Category_id", cat_id);
         System.out.println(responseRepository.findByPid(3L));
-        //System.out.println(responseService.findAllResponsesByUser(userService.getUserByUser_id(1L)));
+        // System.out.println(responseService.findAllResponsesByUser(userService.getUserByUser_id(1L)));
+        // System.out.println(user);
         return "index";
     }
 
@@ -95,13 +97,16 @@ public class ProductController {
         return "redirect:/product/{id}";
     }
 
-    /*public String makeResponse(@PathVariable("id") Long id, Principal principal) {
-        Product product = productService.getProductById(id);
-        String message = "bad idea";
-        System.out.println(message);
-        responseService.makeResponse(message, principal, product);
-        return "index_info";
-    }*/
+    /*
+     * public String makeResponse(@PathVariable("id") Long id, Principal principal)
+     * {
+     * Product product = productService.getProductById(id);
+     * String message = "bad idea";
+     * System.out.println(message);
+     * responseService.makeResponse(message, principal, product);
+     * return "index_info";
+     * }
+     */
 
     @PostMapping("/product/create")
     public String createProduct(@RequestParam("title") String title,

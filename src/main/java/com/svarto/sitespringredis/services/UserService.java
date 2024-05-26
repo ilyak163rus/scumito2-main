@@ -35,7 +35,7 @@ public class UserService {
         user.setActive(true);
         user.setId(newId);
         user.setPassword(passwordEncoder.encode((user.getPassword())));
-        user.getRoles().add(Role.ROLE_ADMIN);
+        user.getRoles().add(Role.ROLE_USER);
         log.info("Saving new User with email: {}", email);
         userRepository.save(user);
 
@@ -47,6 +47,7 @@ public class UserService {
     }
 
     public List<Product> getProductByUser_id(User user) {
+        System.out.println(userRepository.findAll());
         System.out.println("Trying to get product with id" + user.getId() + ":"
                 + productRepository.findByUser_id(user.getId()).toString());
         return productRepository.findByUser_id(user.getId());
@@ -89,9 +90,8 @@ public class UserService {
         return userRepository.findByEmail(principal.getName());
     }
 
-    public Optional<User> getUserByUser_id(Long id){
+    public Optional<User> getUserByUser_id(Long id) {
         return userRepository.findById(id);
     }
-    
 
 }
